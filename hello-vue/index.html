@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Hello Vue</title>
+</head>
+<body>
+    <div id="app">
+        <!--This is where we display our messages-->
+        <div>
+           <h1>{{hello}}</h1>
+           <p v-bind:title="Hover">Hover me!</p>
+        </div>
+    </div>
+
+    <div id="app2">
+        <p v-if='seen'>Can you see me? If yes, set 'seen' to false</p>
+    </div>
+
+    <div id="app3">
+        <ul>
+            <li v-for='list in lists'>{{list.text}}</li>
+        </ul>
+    </div>
+
+    <div id="app4">
+        <ol>
+            <item-list
+                v-for='list in myList'
+                v-bind:item='list'
+                v-bind:key='list.id'
+            ></item-list>
+        </ol>
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        //We initialize Vue apps
+        var app = new Vue ({
+            //define the element on where to put it
+            el: '#app',
+            //define the data containing what we are putting in
+            data: {
+                hello: 'Hello Vue!',
+                Hover: 'We just learned how to hover text using v-bind:title="Hover"!'
+            }
+        });
+
+
+        //we are using v-if
+        var app2 = new Vue ({
+            el: '#app2',
+            data: {
+                //set boolean
+                seen: true
+            }
+        });
+
+
+        //We are using v-for
+        var app3 = new Vue ({
+            el: '#app3',
+            data: {
+                lists: [
+                    {text: 'Hello'},
+                    {text: 'Vue!'},
+                ]
+            }
+        });
+
+        //Vue Component
+        Vue.component('item-list', {
+            props: ['item'],
+            template: '<li>{{item.text}}</li>'
+        });
+        var app4 = new Vue ({
+            el: '#app4',
+            data: {
+                myList: [
+                    {id: 0, text: 'my list 1'},
+                    {id: 1, text: 'my list 2'},
+                    {id: 2, text: 'my list 3'},
+                ]
+            }
+        });
+        
+    </script>
+</body>
+</html>
